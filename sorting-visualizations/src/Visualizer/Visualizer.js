@@ -22,7 +22,13 @@ const Visualizer = () => {
   const [sortName, setSortName] = useState('');
 
   const resetArray = numBars => {
-    setArray(Array.from({ length: numBars }, (_, __) => intInRange(10, 200)));
+    let arr = Array.from({ length: numBars }, (_, __) => intInRange(10, 200));
+    const arrBars = document.getElementsByClassName('array-bar');
+    for (let i = 0; i < arrBars.length; i++) {
+      const btnStyle = arrBars[i].style;
+      btnStyle.backgroundColor = BarColors.PRIMARY;
+    }
+    setArray(arr);
   };
 
   const intInRange = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
