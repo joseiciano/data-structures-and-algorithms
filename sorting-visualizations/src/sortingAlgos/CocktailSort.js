@@ -1,4 +1,4 @@
-import { CompStages } from '../Visualizer/enums.js';
+import { CompStages } from '../SortingVisualizer/enums.js';
 
 export const CocktailSort = (arr, type) => {
   const animations = [];

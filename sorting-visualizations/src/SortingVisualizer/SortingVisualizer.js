@@ -8,7 +8,7 @@ import { MergeSort } from '../sortingAlgos/MergeSort.js';
 import { RadixSort } from '../sortingAlgos/RadixSort.js';
 import { HeapSort } from '../sortingAlgos/HeapSort.js';
 import { BarColors, SortTypes, CompStages } from './enums.js';
-import './Visualizer.css';
+import './SortingVisualizer.css';
 
 const ANIMATION_SPEED_MS = 55; // Change for animation speed increase/decrease
 const SLOW_ANIMATIONS = ANIMATION_SPEED_MS * 5;
