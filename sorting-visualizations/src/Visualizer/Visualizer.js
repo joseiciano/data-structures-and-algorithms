@@ -5,6 +5,7 @@ import { SelectionSort } from '../sortingAlgos/SelectionSort.js';
 import { QuickSort } from '../sortingAlgos/QuickSort.js';
 import { MergeSort } from '../sortingAlgos/MergeSort.js';
 import { RadixSort } from '../sortingAlgos/RadixSort.js';
+import { HeapSort } from '../sortingAlgos/HeapSort.js';
 import { BarColors, SortTypes, CompStages, OptimizedVersion } from './enums.js';
 import './Visualizer.css';
 
@@ -45,6 +46,9 @@ const Visualizer = () => {
         break;
       case SortTypes.RADIX:
         animations = RadixSort(array);
+        break;
+      case SortTypes.HEAP:
+        animations = HeapSort(array);
         break;
       default:
     }
@@ -132,7 +136,7 @@ const Visualizer = () => {
         <button className='sort-btn' onClick={() => sort(SortTypes.RADIX)}>
           Radix Sort
         </button>
-        <button className='sort-btn' onClick={() => sort(SortTypes.BUBBLE)}>
+        <button className='sort-btn' onClick={() => sort(SortTypes.HEAP)}>
           Heap Sort
         </button>
       </div>

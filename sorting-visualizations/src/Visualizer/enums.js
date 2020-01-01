@@ -10,7 +10,8 @@ const SortTypes = {
   SELECTION: 'Selection',
   QUICK: 'Quick',
   MERGE: 'Merge',
-  RADIX: 'Radix'
+  RADIX: 'Radix',
+  HEAP: 'Heap'
 };
 
 const CompStages = {
