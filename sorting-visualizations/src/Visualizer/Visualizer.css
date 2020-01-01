@@ -11,3 +11,7 @@
   display: inline-block;
   margin: 0 1px;
 }
+
+.sort-btn {
+  visibility: visible;
+}

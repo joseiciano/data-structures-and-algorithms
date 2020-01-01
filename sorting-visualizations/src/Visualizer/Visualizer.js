@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { getBubbleSortAnimations } from '../algorithms/BubbleSort.js';
-import { getInsertionSortAnimations } from '../algorithms/InsertionSort.js';
+import { BubbleSort } from '../sortingAlgos/BubbleSort.js';
+import { InsertionSort } from '../sortingAlgos/InsertionSort.js';
+import { SelectionSort } from '../sortingAlgos/SelectionSort.js';
+import { QuickSort } from '../sortingAlgos/QuickSort.js';
+import { MergeSort } from '../sortingAlgos/MergeSort.js';
+import { RadixSort } from '../sortingAlgos/RadixSort.js';
 import { BarColors, SortTypes, CompStages, OptimizedVersion } from './enums.js';
 import './Visualizer.css';
 
-const ANIMATION_SPEED_MS = 1; // Change for animation speed increase/decrease
+const ANIMATION_SPEED_MS = 50; // Change for animation speed increase/decrease
 const DEFAULT_NUM_BARS = 200; // Change for number of bars in array
-const SCALE = 1.5;
+const SCALE = 1.2;
 
 const Visualizer = () => {
   const [array, setArray] = useState([]);
@@ -22,11 +26,28 @@ const Visualizer = () => {
   const sort = sortType => {
     setSortName(sortType);
 
-    let finished = false;
     let animations = [];
-    if (sortType === SortTypes.BUBBLE)
-      animations = getBubbleSortAnimations(array, OptimizedVersion.OPTIMIZED);
-    else if (sortType === SortTypes.INSERTION) animations = getInsertionSortAnimations(array);
+    switch (sortType) {
+      case SortTypes.BUBBLE:
+        animations = BubbleSort(array, OptimizedVersion.OPTIMIZED);
+        break;
+      case SortTypes.INSERTION:
+        animations = InsertionSort(array);
+        break;
+      case SortTypes.SELECTION:
+        animations = SelectionSort(array);
+        break;
+      case SortTypes.QUICK:
+        animations = QuickSort(array);
+        break;
+      case SortTypes.MERGE:
+        animations = MergeSort(array);
+        break;
+      case SortTypes.RADIX:
+        animations = RadixSort(array);
+        break;
+      default:
+    }
 
     for (let i = 0; i < animations.length; i++) {
       const arrBars = document.getElementsByClassName('array-bar');
@@ -51,14 +72,12 @@ const Visualizer = () => {
   };
 
   const updateNumEle = e => {
-    if (isNum(e.target.value)) setNumEle(e.target.value);
+    if (isNum(e.target.value)) {
+      setNumEle(e.target.value);
+    }
   };
 
   const isNum = str => /^\d+$/.test(str);
-
-  useEffect(() => {
-    resetArray(numEle);
-  }, []);
 
   return (
     <div
@@ -95,13 +114,27 @@ const Visualizer = () => {
       </div>
 
       <div className='sorts'>
-        <button onClick={() => sort(SortTypes.BUBBLE)}>Bubble Sort</button>
-        <button onClick={() => sort(SortTypes.BUBBLE)}>Insertion Sort</button>
-        <button onClick={() => sort(SortTypes.BUBBLE)}>Selection Sort</button>
-        <button onClick={() => sort(SortTypes.BUBBLE)}>Quick Sort</button>
-        <button onClick={() => sort(SortTypes.BUBBLE)}>Merge Sort</button>
-        <button onClick={() => sort(SortTypes.BUBBLE)}>Radix Sort</button>
-        <button onClick={() => sort(SortTypes.BUBBLE)}>Heap Sort</button>
+        <button className='sort-btn' onClick={() => sort(SortTypes.BUBBLE)}>
+          Bubble Sort
+        </button>
+        <button className='sort-btn' onClick={() => sort(SortTypes.INSERTION)}>
+          Insertion Sort
+        </button>
+        <button className='sort-btn' onClick={() => sort(SortTypes.SELECTION)}>
+          Selection Sort
+        </button>
+        <button className='sort-btn' onClick={() => sort(SortTypes.QUICK)}>
+          Quick Sort
+        </button>
+        <button className='sort-btn' onClick={() => sort(SortTypes.MERGE)}>
+          Merge Sort
+        </button>
+        <button className='sort-btn' onClick={() => sort(SortTypes.RADIX)}>
+          Radix Sort
+        </button>
+        <button className='sort-btn' onClick={() => sort(SortTypes.BUBBLE)}>
+          Heap Sort
+        </button>
       </div>
     </div>
   );
