@@ -2,33 +2,37 @@ import { CompStages } from '../Visualizer/enums.js';
 
 export const SelectionSort = (arr, type) => {
   const animations = [];
-  const aux = arr.slice();
+  const arrcpy = arr.slice();
 
-  selectionSort(aux, animations);
+  selectionSort(arrcpy, animations);
   return animations;
 };
 
-const selectionSort = (aux, animations) => {
-  for (let i = 0; i < aux.length; i++) {
+const swap = (arr, i, j) => {
+  let temp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = temp;
+};
+
+const selectionSort = (arr, animations) => {
+  for (let i = 0; i < arr.length; i++) {
     let min = i;
     animations.push([min, min, CompStages.FIRST_COMPARE]);
     animations.push([min, min, CompStages.SECOND_COMPARE]);
 
-    for (let j = i + 1; j < aux.length; j++) {
+    for (let j = i + 1; j < arr.length; j++) {
       animations.push([j, min, CompStages.FIRST_COMPARE]);
       animations.push([j, min, CompStages.SECOND_COMPARE]);
-      if (aux[j] < aux[min]) {
+      if (arr[j] < arr[min]) {
         min = j;
       }
     }
 
     animations.push([i, min, CompStages.FIRST_COMPARE]);
+    animations.push([min, arr[i], CompStages.SWAP]);
+    animations.push([i, arr[min], CompStages.SWAP]);
     animations.push([i, min, CompStages.SECOND_COMPARE]);
-    animations.push([i, aux[min], CompStages.SWAP]);
-    animations.push([min, aux[i], CompStages.SWAP]);
 
-    let temp = aux[min];
-    aux[min] = aux[i];
-    aux[i] = temp;
+    swap(arr, i, min);
   }
 };

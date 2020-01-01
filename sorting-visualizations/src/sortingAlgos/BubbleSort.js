@@ -1,43 +1,29 @@
-import { CompStages, OptimizedVersion } from '../Visualizer/enums.js';
+import { CompStages } from '../Visualizer/enums.js';
 
-export const BubbleSort = (arr, type) => {
+export const BubbleSort = arr => {
   const animations = [];
-  const aux = arr.slice();
+  const arrcpy = arr.slice();
 
-  if (type === OptimizedVersion.OPTIMIZED) bubbleSortOptimized(aux, animations);
-  else bubbleSortUnoptimized(aux, animations);
+  bubblesort(arrcpy, animations);
   return animations;
 };
 
-const bubbleSortOptimized = (aux, animations) => {
-  for (let i = 0; i < aux.length; i++) {
-    for (let j = 0; j < aux.length - i - 1; j++) {
-      if (aux[j] > aux[j + 1]) {
-        animations.push([j, j + 1, CompStages.FIRST_COMPARE]);
-        animations.push([j, j + 1, CompStages.SECOND_COMPARE]);
-        animations.push([j, aux[j + 1], CompStages.SWAP]);
-        animations.push([j + 1, aux[j], CompStages.SWAP]);
-
-        let temp = aux[j];
-        aux[j] = aux[j + 1];
-        aux[j + 1] = temp;
-      }
-    }
-  }
+const swap = (arr, i, j) => {
+  let temp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = temp;
 };
 
-const bubbleSortUnoptimized = (aux, animations) => {
-  for (let i = 0; i < aux.length; i++) {
-    for (let j = 0; j < aux.length - 1; j++) {
-      if (aux[j] > aux[j + 1]) {
-        animations.push([j, j + 1, CompStages.FIRST_COMPARE]);
-        animations.push([j, j + 1, CompStages.SECOND_COMPARE]);
-        animations.push([j, aux[j + 1], CompStages.SWAP]);
-        animations.push([j + 1, aux[j], CompStages.SWAP]);
-        let temp = aux[j];
-        aux[j] = aux[j + 1];
-        aux[j + 1] = temp;
+const bubblesort = (arr, animations) => {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr.length - i - 1; j++) {
+      animations.push([j, j + 1, CompStages.FIRST_COMPARE]);
+      if (arr[j] > arr[j + 1]) {
+        animations.push([j + 1, arr[j], CompStages.SWAP]);
+        animations.push([j, arr[j + 1], CompStages.SWAP]);
+        swap(arr, j, j + 1);
       }
+      animations.push([j, j + 1, CompStages.SECOND_COMPARE]);
     }
   }
 };

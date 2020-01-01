@@ -21,32 +21,31 @@ const mergesort = (arr, lo, hi, aux, animations) => {
   while (i <= mid || j <= hi) {
     // Only the lower end of the array exists
     if (j > hi) {
-      animations.push([i, i, CompStages.FIRST_COMPARE]); // Change color of indices (i, i). This is what we are comparing
-      animations.push([i, i, CompStages.SECOND_COMPARE]); // Change the color back by pushing them again
-      animations.push([k, aux[i], CompStages.SWAP]); // Overwrite position k (in original array) with position i of (auxillary array)
+      animations.push([i, i, CompStages.FIRST_COMPARE]);
+      animations.push([k, aux[i], CompStages.SWAP]);
+      animations.push([i, i, CompStages.SECOND_COMPARE]);
       arr[k++] = aux[i++];
     }
 
     // Only the upper end of the array exists
     else if (i > mid) {
-      animations.push([j, j, CompStages.FIRST_COMPARE]); // Change color of indices (j, j). This is what we are comparing
-      animations.push([j, j, CompStages.SECOND_COMPARE]); // Change the color back by pushing them again
-      animations.push([k, aux[j], CompStages.SWAP]); // Overwrite position k (in original array) with position i of (auxillary array)
+      animations.push([j, j, CompStages.FIRST_COMPARE]);
+      animations.push([k, aux[j], CompStages.SWAP]);
+      animations.push([j, j, CompStages.SECOND_COMPARE]);
       arr[k++] = aux[j++];
     }
 
     // We are comparing values on both ends of the array
     else {
-      animations.push([i, j, CompStages.FIRST_COMPARE]); // Change color of indices (i, j). This is what we are comparing
-      animations.push([i, j, CompStages.SECOND_COMPARE]); // Change the color back by pushing them again
-
+      animations.push([i, j, CompStages.FIRST_COMPARE]);
       if (aux[i] <= aux[j]) {
-        animations.push([k, aux[i], CompStages.SWAP]); // Overwrite position k (in original array) with position i of (auxillary array)
+        animations.push([k, aux[i], CompStages.SWAP]);
         arr[k++] = aux[i++];
       } else {
-        animations.push([k, aux[j], CompStages.SWAP]); // Overwrite position k (in original array) with position j of (auxillary array)
+        animations.push([k, aux[j], CompStages.SWAP]);
         arr[k++] = aux[j++];
       }
+      animations.push([i, j, CompStages.SECOND_COMPARE]);
     }
   }
 };

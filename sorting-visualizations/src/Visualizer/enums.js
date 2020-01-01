@@ -1,7 +1,9 @@
 const BarColors = {
   PRIMARY: 'turquoise',
   SECONDARY: 'red',
-  TERTIARY: 'purple'
+  PASSING: 'blue',
+  IS_SORTED: 'purple',
+  PIVOT: 'gold'
 };
 
 const SortTypes = {
@@ -15,14 +17,11 @@ const SortTypes = {
 };
 
 const CompStages = {
-  FIRST_COMPARE: 1,
-  SECOND_COMPARE: 2,
-  SWAP: 3
+  FIRST_COMPARE: BarColors.SECONDARY,
+  SECOND_COMPARE: BarColors.PRIMARY,
+  SWAP: '#FFA07A',
+  FINAL_PASS_SETCURRENT: BarColors.PASSING,
+  FINAL_PASS_SETPAST: BarColors.IS_SORTED
 };
 
-const OptimizedVersion = {
-  OPTIMIZED: true,
-  UNOPTIMZIED: false
-};
-
-export { BarColors, SortTypes, CompStages, OptimizedVersion };
+export { BarColors, SortTypes, CompStages };

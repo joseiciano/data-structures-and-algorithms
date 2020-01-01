@@ -17,9 +17,9 @@ const insertionSort = (aux, animations) => {
 
     for (j = i; j > 0 && start < aux[j - 1]; j--) {
       animations.push([j, j - 1, CompStages.FIRST_COMPARE]);
-      animations.push([j, j - 1, CompStages.SECOND_COMPARE]);
       animations.push([j, aux[j - 1], CompStages.SWAP]);
       animations.push([j - 1, aux[j], CompStages.SWAP]);
+      animations.push([j, j - 1, CompStages.SECOND_COMPARE]);
       aux[j] = aux[j - 1];
     }
 

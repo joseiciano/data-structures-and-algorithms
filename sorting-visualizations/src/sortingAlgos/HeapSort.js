@@ -29,24 +29,24 @@ const heapify = (arr, size, parent, animations) => {
 
   if (largest !== parent) {
     animations.push([parent, largest, CompStages.FIRST_COMPARE]);
-    animations.push([parent, largest, CompStages.SECOND_COMPARE]);
     animations.push([parent, arr[largest], CompStages.SWAP]);
     animations.push([largest, arr[parent], CompStages.SWAP]);
+    animations.push([parent, largest, CompStages.SECOND_COMPARE]);
     swap(arr, parent, largest);
     heapify(arr, size, largest, animations);
   }
 };
 
 const heapsort = (arr, animations) => {
-  for (let i = arr.length / 2 - 1; i >= 0; i--) {
+  for (let i = Math.floor(arr.length / 2 - 1); i >= 0; i--) {
     heapify(arr, arr.length, i, animations);
   }
 
   for (let i = arr.length - 1; i >= 0; i--) {
     animations.push([0, i, CompStages.FIRST_COMPARE]);
-    animations.push([0, i, CompStages.SECOND_COMPARE]);
     animations.push([0, arr[i], CompStages.SWAP]);
     animations.push([i, arr[0], CompStages.SWAP]);
+    animations.push([0, i, CompStages.SECOND_COMPARE]);
     swap(arr, 0, i);
     heapify(arr, i, 0, animations);
   }

@@ -18,25 +18,24 @@ const quicksort = (arr, lo, hi, animations) => {
 const partition = (arr, lo, hi, animations) => {
   let pivot = arr[hi];
   let i = lo - 1;
-  animations.push([hi, hi, CompStages.FIRST_COMPARE]);
 
   for (let j = lo; j < hi; j++) {
     animations.push([j, hi, CompStages.FIRST_COMPARE]);
     animations.push([j, hi, CompStages.SECOND_COMPARE]);
     if (arr[j] < pivot) {
       animations.push([i + 1, j, CompStages.FIRST_COMPARE]);
-      animations.push([i + 1, j, CompStages.SECOND_COMPARE]);
       animations.push([j, arr[i + 1], CompStages.SWAP]);
       animations.push([i + 1, arr[j], CompStages.SWAP]);
+      animations.push([i + 1, j, CompStages.SECOND_COMPARE]);
       i++;
       swap(arr, i, j);
     }
   }
 
   animations.push([i + 1, hi, CompStages.FIRST_COMPARE]);
-  animations.push([i + 1, hi, CompStages.SECOND_COMPARE]);
-  animations.push([i + 1, arr[hi], CompStages.SWAP]);
   animations.push([hi, arr[i + 1], CompStages.SWAP]);
+  animations.push([i + 1, arr[hi], CompStages.SWAP]);
+  animations.push([i + 1, hi, CompStages.SECOND_COMPARE]);
   swap(arr, i + 1, hi);
   return i + 1;
 };

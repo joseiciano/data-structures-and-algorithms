@@ -49,8 +49,8 @@ const radixSort = (aux, animations) => {
     for (let i = 0, j = 0; i < 10; i++) {
       while (buckets[i].length > 0) {
         animations.push([j, j, CompStages.FIRST_COMPARE]);
-        animations.push([j, j, CompStages.SECOND_COMPARE]);
         animations.push([j, buckets[i][0], CompStages.SWAP]);
+        animations.push([j, j, CompStages.SECOND_COMPARE]);
         aux[j++] = buckets[i].shift();
       }
     }
