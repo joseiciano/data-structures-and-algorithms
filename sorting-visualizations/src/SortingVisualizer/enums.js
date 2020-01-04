@@ -8,6 +8,7 @@ const BarColors = {
 
 const SortTypes = {
   BUBBLE: 'Bubble',
+  COCKTAIL: 'Cocktail',
   INSERTION: 'Insertion',
   SELECTION: 'Selection',
   QUICK: 'Quick',

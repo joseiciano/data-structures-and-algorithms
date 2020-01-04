@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BubbleSort } from '../sortingAlgos/BubbleSort.js';
 import { CocktailSort } from '../sortingAlgos/CocktailSort.js';
 import { InsertionSort } from '../sortingAlgos/InsertionSort.js';
@@ -16,10 +16,11 @@ const DEFAULT_NUM_BARS = 10; // Change for number of bars in array
 // const DEFAULT_NUM_BARS = 156; // Change for number of bars in array
 const SCALE = 1.2;
 
-const Visualizer = () => {
+const SortingVisualizer = () => {
   const [array, setArray] = useState([]);
   const [numEle, setNumEle] = useState(DEFAULT_NUM_BARS);
   const [sortName, setSortName] = useState('');
+  const [arrayMax, setArrayMax] = useState(0);
 
   const resetArray = numBars => {
     let arr = Array.from({ length: numBars }, (_, __) => intInRange(10, 200));
@@ -29,6 +30,8 @@ const Visualizer = () => {
       btnStyle.backgroundColor = BarColors.PRIMARY;
     }
     setArray(arr);
+    setArrayMax(Math.max(arr));
+    setSortName('');
   };
 
   const intInRange = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
@@ -83,7 +86,6 @@ const Visualizer = () => {
           b2Style.backgroundColor = color;
         }, i * SLOW_ANIMATIONS);
       } else {
-        console.log('SORTSTAGE = ' + sortStage);
         const [bar, _, color] = animations[i];
         const barStyle = arrBars[bar].style;
         setTimeout(() => {
@@ -127,10 +129,10 @@ const Visualizer = () => {
       {sortName === '' ? (
         <h2>Click a button to view a sort</h2>
       ) : (
-        <h2>Currently viewing {sortName} sort</h2>
+        <h2>Currently viewing {sortName} Sort</h2>
       )}
 
-      <div className='array-bars' style={{ display: 'inline-block', height: `${Math.max(array)}px` }}>
+      <div className='array-bars' style={{ display: 'inline-block', height: `${arrayMax}px` }}>
         {array.map((value, idx) => (
           <div
             className='array-bar'
@@ -153,33 +155,14 @@ const Visualizer = () => {
       </div>
 
       <div className='sorts'>
-        <button className='sort-btn' onClick={() => sort(SortTypes.BUBBLE)}>
-          Bubble Sort
-        </button>
-        <button className='sort-btn' onClick={() => sort(SortTypes.COCKTAIL)}>
-          Cocktail Sort
-        </button>
-        <button className='sort-btn' onClick={() => sort(SortTypes.INSERTION)}>
-          Insertion Sort
-        </button>
-        <button className='sort-btn' onClick={() => sort(SortTypes.SELECTION)}>
-          Selection Sort
-        </button>
-        <button className='sort-btn' onClick={() => sort(SortTypes.QUICK)}>
-          Quick Sort
-        </button>
-        <button className='sort-btn' onClick={() => sort(SortTypes.MERGE)}>
-          Merge Sort
-        </button>
-        <button className='sort-btn' onClick={() => sort(SortTypes.RADIX)}>
-          Radix Sort
-        </button>
-        <button className='sort-btn' onClick={() => sort(SortTypes.HEAP)}>
-          Heap Sort
-        </button>
+        {Object.keys(SortTypes).map((key, idx) => (
+          <button className='sort-btn' onClick={() => sort(SortTypes[key])}>
+            {SortTypes[key]} Sort
+          </button>
+        ))}
       </div>
     </div>
   );
 };
 
-export default Visualizer;
+export default SortingVisualizer;
