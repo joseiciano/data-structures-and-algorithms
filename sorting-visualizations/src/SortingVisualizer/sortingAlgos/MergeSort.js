@@ -1,4 +1,4 @@
-import { CompStages } from '../SortingVisualizer/enums.js';
+import { CompStages } from '../enums.js';
 
 export const MergeSort = arr => {
   const animations = [];
@@ -36,16 +36,16 @@ const mergesort = (arr, lo, hi, aux, animations) => {
     }
 
     // We are comparing values on both ends of the array
-    else {
+    else if (aux[i] <= aux[j]) {
       animations.push([i, j, CompStages.FIRST_COMPARE]);
-      if (aux[i] <= aux[j]) {
-        animations.push([k, aux[i], CompStages.SWAP]);
-        arr[k++] = aux[i++];
-      } else {
-        animations.push([k, aux[j], CompStages.SWAP]);
-        arr[k++] = aux[j++];
-      }
+      animations.push([k, aux[i], CompStages.SWAP]);
       animations.push([i, j, CompStages.SECOND_COMPARE]);
+      arr[k++] = aux[i++];
+    } else if (aux[i] > aux[j]) {
+      animations.push([i, j, CompStages.FIRST_COMPARE]);
+      animations.push([k, aux[j], CompStages.SWAP]);
+      animations.push([i, j, CompStages.SECOND_COMPARE]);
+      arr[k++] = aux[j++];
     }
   }
 };

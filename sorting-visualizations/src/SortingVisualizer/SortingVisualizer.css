@@ -1,14 +1,15 @@
 .array-container {
   position: relative;
   margin: auto;
-  /* left: 100px; */
-  /* top: 100px; */
+  left: 50px;
+  top: 100px;
   width: 80%;
   padding: 10px;
 }
 
 .array-bar {
   display: inline-block;
+  margin: auto;
   margin: 0 1px;
 }
 

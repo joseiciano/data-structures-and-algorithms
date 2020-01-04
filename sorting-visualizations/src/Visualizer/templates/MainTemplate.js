@@ -1,19 +1,16 @@
 import React from 'react';
-import { SideBarLeft } from './templates/SideBarLeft.js';
-import { SideBarRight } from './templates/SideBarRight.js';
-import { NavBar } from './templates/NavBar.js';
-import SortingVisualizer from '../SortingVisualizer/SortingVisualizer.js';
+import { SideBarLeft } from './SideBarLeft.js';
+import { SideBarRight } from './SideBarRight.js';
+import { NavBar } from './NavBar.js';
 
-const MainTemplate = () => {
+const MainTemplate = props => {
   return (
     <div id='outer-container' style={styles.backdrop}>
       <SideBarLeft outerContainerId={'outer-container'} pageWrapId={'page-wrap'} />
       <SideBarRight outerContainerId={'outer-container'} pageWrapId={'page-wrap'} />
       <main id='page-wrap'>
         <NavBar />
-        <div className='main-window'>
-          <SortingVisualizer />
-        </div>
+        <div className='main-window'>{props.screen}</div>
       </main>
       <br />
     </div>
@@ -34,4 +31,5 @@ const styles = {
     width: '100%'
   }
 };
-export { MainTemplate };
+
+export default MainTemplate;
